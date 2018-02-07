@@ -1,4 +1,4 @@
-{% extends "base" %}
+{% import "macros" as macros %}
 
 {% block headers %}
 <script src="/static/all_questions.js"></script>
@@ -11,8 +11,8 @@ $( document ).ready(function() {
 </script>
 {% endblock headers %}
 
-
 {% block containers %}
+
 <div class="first_time">
   <div class="modal-content modal_thing">
   <span class="close">&times;</span>
@@ -28,6 +28,9 @@ $( document ).ready(function() {
   <div class="row">
     <div class="col">
       {% if next_q %}
+        <a href="">prev question</a>
+      {% endif %}
+      {% if next_q %}
         <a style='float:right' href="{{next_q}}">next question</a>
       {% endif %}
     </div>
@@ -41,8 +44,8 @@ $( document ).ready(function() {
   <div class="row">
     <div class="col">
       <p>
-      {% block question %}
-      {% endblock question %}
+    {% block question %}
+    {% endblock question %}
       </p>
         <a class="unhider" href="#">Show Table Schema</a>
         <span class="hidden">
@@ -112,11 +115,8 @@ $( document ).ready(function() {
         {% else %}
           answer-half-correct
         {% endif %}
-      {% else %}
-        answer-wrong
       {% endif %}
       ">
-        {{ macros::sql_table(sql_data=sql_to_run_result) }}
       </table>
     </div>
   </div>
